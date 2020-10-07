@@ -479,8 +479,10 @@ Implement a function that returns the last digit of a given number.
   whether it works for you!
 -}
 -- DON'T FORGET TO SPECIFY THE TYPE IN HERE
-lastDigit :: Integral n => n -> n
-lastDigit = flip mod 10
+
+
+lastDigit :: Int -> Int
+lastDigit = flip mod 10 . abs
 
 
 {- |
@@ -624,9 +626,11 @@ Try to introduce variables in this task (either with let-in or where) to avoid
 specifying complex expressions.
 -}
 
-sumLast2 :: Integral a => a -> a
-sumLast2 n = 
-  let lastD = lastDigit n
+
+sumLast2 :: Int -> Int
+sumLast2 m = 
+  let n = abs m
+      lastD = lastDigit n
       sLastD = div (mod n 100) 10
       result = lastD + sLastD
   in result
@@ -649,10 +653,10 @@ You need to use recursion in this task. Feel free to return to it later, if you
 aren't ready for this boss yet!
 -}
 
-firstDigit :: Integral t => t -> t
+firstDigit :: Int -> Int
 firstDigit n
-  | n < 10 = n
-  | otherwise = firstDigit (div n 10)
+  | (abs n) < 10 = abs n
+  | otherwise = firstDigit $ flip div 10 $ abs n
 
 
 {-
