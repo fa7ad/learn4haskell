@@ -871,7 +871,7 @@ and reverses it.
   cheating!
 -}
 rewind :: [a] -> [a]
-rewind = foldl (\xs x -> x : xs) []
+rewind = foldl (flip (:)) []
 
 
 {-
