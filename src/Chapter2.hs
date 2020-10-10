@@ -353,7 +353,7 @@ Implement a function that returns only the first half of a given list.
 firstHalf :: [a] -> [a]
 firstHalf = take =<< halfLen
   where
-    halfLen = flip div 2 . length
+    halfLen = (`div` 2) . length
 
 {- |
 =🛡= Pattern matching
@@ -735,8 +735,7 @@ value of the element itself
 🕯 HINT: Use combination of 'map' and 'replicate'
 -}
 smartReplicate :: [Int] -> [Int]
-smartReplicate [] = []
-smartReplicate (x : xs) = replicate x x ++ smartReplicate xs
+smartReplicate = concatMap (\x -> replicate x x)
 
 {- |
 =⚔️= Task 9
@@ -854,7 +853,9 @@ list.
 rotate :: Int -> [a] -> [a]
 rotate n xs
   | n < 0 = []
-  | otherwise = take (length xs) $ drop n $ cycle xs
+  | otherwise = take nxs $ drop (mod n nxs) $ cycle xs
+  where
+    nxs = length xs
 
 {- |
 =💣= Task 12*
